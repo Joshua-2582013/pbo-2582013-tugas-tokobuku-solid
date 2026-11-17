@@ -12,6 +12,10 @@ public class Voucher implements MetodeBayar {
 
     @Override
     public int totalBayar(int totalBelanja) {
-        return totalBelanja - nilai;
+        // Keluaran saat masih memakai `return totalBelanja - nilai;` (melanggar kontrak LSP):
+        // Voucher Rp100.000    : Rp-36.000
+
+        // Perbaikan agar patuh kontrak (hasil tidak pernah negatif):
+        return Math.max(0, totalBelanja - nilai);
     }
 }
